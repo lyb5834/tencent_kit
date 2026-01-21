@@ -189,6 +189,16 @@ enum TencentRetCode {
                                                         description:nil];
         SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:object];
         [QQApiInterface sendReq:req];
+    } else if (scene.intValue == SCENE_QZONE) {
+        NSString *imageUri = call.arguments[@"imageUri"];
+        NSURL *imageUrl = [NSURL URLWithString:imageUri];
+        NSData *imageData = [NSData dataWithContentsOfFile:imageUrl.path];
+        QQApiImageArrayForQZoneObject *object = [QQApiImageArrayForQZoneObject
+                                                 objectWithimageDataArray:@[imageData]
+                                                 title:nil
+                                                 extMap:nil];
+        SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:object];
+        [QQApiInterface SendReqToQZone:req];
     }
     result(nil);
 }

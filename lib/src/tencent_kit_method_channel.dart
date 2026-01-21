@@ -151,7 +151,7 @@ class MethodChannelTencentKit extends TencentKitPlatform {
     String? appName,
     int extInt = TencentQZoneFlag.kDefault,
   }) {
-    assert(scene == TencentScene.kScene_QQ);
+    // assert(scene == TencentScene.kScene_QQ);
     assert(imageUri.isScheme('file'));
     return methodChannel.invokeMethod<void>(
       'shareImage',

@@ -346,6 +346,21 @@ public class TencentKitPlugin implements FlutterPlugin, ActivityAware, ActivityR
             if (tencent != null) {
                 tencent.shareToQQ(activityPluginBinding.getActivity(), params, shareListener);
             }
+        } else if (scene == TencentScene.SCENE_QZONE) {
+            final String imageUri = call.argument("imageUri");
+            final String appName = call.argument("appName");
+            final int extInt = call.argument("extInt");
+
+            final Bundle params = new Bundle();
+            params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
+            params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, Uri.parse(imageUri).getPath());
+            if (!TextUtils.isEmpty(appName)) {
+                params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
+            }
+            params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, extInt);
+            if (tencent != null) {
+                tencent.publishToQzone(activityPluginBinding.getActivity(), params, shareListener);
+            }
         }
         result.success(null);
     }
